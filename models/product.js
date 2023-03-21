@@ -15,7 +15,8 @@ module.exports = class Product {
   }
 
   static deleteproductbyID(id){   
-    
+    return db.execute('DELETE FROM products WHERE products.id = ?;'
+    ,[id]);
   }
 
   static fetchAll() {
@@ -23,5 +24,7 @@ module.exports = class Product {
   }
 
   static findById(id) {
+    return db.execute('SELECT * FROM products WHERE products.id = ?'
+    ,[id]);
   }
 };
