@@ -31,9 +31,22 @@ Product.belongsTo(User,{
 })
 User.hasMany(Product);
 
-sequelize.sync({force: true})
+// sequelize.sync({force: true})
+sequelize.sync()
 .then(result => {
-    app.listen(4000);
+    return User.findByPk(1);
+})
+.then(user => {
+    if(!user){
+        return User.create({
+            name: "Abhi",
+            email: "test@test.com"
+        })
+    }
+    return user;
+})
+.then(user => {
+    app.listen(3000)
 })
 .catch(err => {
     console.log(err);
